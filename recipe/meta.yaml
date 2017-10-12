@@ -14,27 +14,35 @@ source:
     - https://cran.r-project.org/src/contrib/Archive/tm/tm_{{ version }}.tar.gz
   sha256: 184dc285d3c53b8b4adacfd78b2b098c1bf8ead948d18719efa979a4a6cfe6fc
 
-build:
-  number: 0
-  skip: true  # [win32]
 
+  # patches:
+   # List any patch files here
+   # - fix.patch
+
+build:
+  # If this is a new build for the same version, increment the build number.
+  number: 0
+
+  # This is required to make R link correctly on Linux.
   rpaths:
     - lib/R/lib/
     - lib/
 
+# Suggests: filehash, methods, Rcampdf, Rgraphviz, Rpoppler, SnowballC, tm.lexicon.GeneralInquirer, XML
 requirements:
   build:
     - r-base
+    - {{ compiler('c') }}        # [not win]
+    - {{ compiler('cxx') }}      # [not win]
+    - {{native}}toolchain        # [win]
     - r-bh
     - r-nlp >=0.1_6.2
     - r-rcpp
     - r-slam >=0.1_37
-    - posix                # [win]
-    - {{native}}toolchain  # [win]
-    - gcc                  # [not win]
 
   run:
     - r-base
+    - {{native}}gcc-libs         # [win]
     - r-bh
     - r-nlp >=0.1_6.2
     - r-rcpp
@@ -42,8 +50,15 @@ requirements:
 
 test:
   commands:
-    - $R -e "library('tm')"  # [not win]
+    # You can put additional test commands to be run here.
+    - $R -e "library('tm')"           # [not win]
     - "\"%R%\" -e \"library('tm')\""  # [win]
+
+  # You can also put a file called run_test.py, run_test.sh, or run_test.bat
+  # in the recipe that will be run at test time.
+
+  # requires:
+    # Put any additional test requirements here.
 
 about:
   home: http://tm.r-forge.r-project.org/
@@ -55,3 +70,31 @@ extra:
   recipe-maintainers:
     - johanneskoester
     - bgruening
+    - mingwandroid
+
+# The original CRAN metadata for this package was:
+
+# Package: tm
+# Title: Text Mining Package
+# Version: 0.7-1
+# Date: 2017-03-02
+# Authors@R: c(person("Ingo", "Feinerer", role = c("aut", "cre"), email = "feinerer@logic.at"), person("Kurt", "Hornik", role = "aut"), person("Artifex Software, Inc.", role = c("ctb", "cph"), comment = "pdf_info.ps taken from GPL Ghostscript"))
+# Depends: R (>= 3.2.0), NLP (>= 0.1-6.2)
+# Imports: Rcpp, parallel, slam (>= 0.1-37), stats, tools, utils, graphics
+# LinkingTo: BH, Rcpp
+# Suggests: filehash, methods, Rcampdf, Rgraphviz, Rpoppler, SnowballC, tm.lexicon.GeneralInquirer, XML
+# SystemRequirements: Antiword (<http://www.winfield.demon.nl/>) for reading MS Word files, pdfinfo and pdftotext from Poppler (<http://poppler.freedesktop.org/>) for reading PDF
+# Description: A framework for text mining applications within R.
+# License: GPL-3
+# URL: http://tm.r-forge.r-project.org/
+# Additional_repositories: http://datacube.wu.ac.at
+# NeedsCompilation: yes
+# Packaged: 2017-03-02 14:36:20 UTC; hornik
+# Author: Ingo Feinerer [aut, cre], Kurt Hornik [aut], Artifex Software, Inc. [ctb, cph] (pdf_info.ps taken from GPL Ghostscript)
+# Maintainer: Ingo Feinerer <feinerer@logic.at>
+# Repository: CRAN
+# Date/Publication: 2017-03-02 17:45:01
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
