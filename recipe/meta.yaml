@@ -1,4 +1,4 @@
-{% set version = '0.7-1' %}
+{% set version = '0.7-3' %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -12,7 +12,7 @@ source:
   url:
     - https://cran.r-project.org/src/contrib/tm_{{ version }}.tar.gz
     - https://cran.r-project.org/src/contrib/Archive/tm/tm_{{ version }}.tar.gz
-  sha256: 184dc285d3c53b8b4adacfd78b2b098c1bf8ead948d18719efa979a4a6cfe6fc
+  sha256: f3c3e151e621ffb0c82048b5bf9c2a34c8fb34cf5d2943544979b4fcc2cc1c11
 
 
   # patches:
@@ -28,7 +28,7 @@ build:
     - lib/R/lib/
     - lib/
 
-# Suggests: filehash, methods, Rcampdf, Rgraphviz, Rpoppler, SnowballC, tm.lexicon.GeneralInquirer, XML
+# Suggests: antiword, filehash, methods, pdftools, Rcampdf, Rgraphviz, Rpoppler, SnowballC, testthat, tm.lexicon.GeneralInquirer
 requirements:
   build:
     - r-base
@@ -41,6 +41,7 @@ requirements:
     - r-nlp >=0.1_6.2
     - r-rcpp
     - r-slam >=0.1_37
+    - r-xml2
 
   run:
     - r-base
@@ -49,6 +50,7 @@ requirements:
     - r-nlp >=0.1_6.2
     - r-rcpp
     - r-slam >=0.1_37
+    - r-xml2
 
 test:
   commands:
@@ -78,24 +80,24 @@ extra:
 
 # Package: tm
 # Title: Text Mining Package
-# Version: 0.7-1
-# Date: 2017-03-02
-# Authors@R: c(person("Ingo", "Feinerer", role = c("aut", "cre"), email = "feinerer@logic.at"), person("Kurt", "Hornik", role = "aut"), person("Artifex Software, Inc.", role = c("ctb", "cph"), comment = "pdf_info.ps taken from GPL Ghostscript"))
+# Version: 0.7-3
+# Date: 2017-12-06
+# Authors@R: c(person("Ingo", "Feinerer", role = c("aut", "cre"), email = "feinerer@logic.at"), person("Kurt", "Hornik", role = "aut", comment = c(ORCID = "0000-0003-4198-9911")), person("Artifex Software, Inc.", role = c("ctb", "cph"), comment = "pdf_info.ps taken from GPL Ghostscript"))
 # Depends: R (>= 3.2.0), NLP (>= 0.1-6.2)
-# Imports: Rcpp, parallel, slam (>= 0.1-37), stats, tools, utils, graphics
+# Imports: Rcpp, parallel, slam (>= 0.1-37), stats, tools, utils, graphics, xml2
 # LinkingTo: BH, Rcpp
-# Suggests: filehash, methods, Rcampdf, Rgraphviz, Rpoppler, SnowballC, tm.lexicon.GeneralInquirer, XML
-# SystemRequirements: Antiword (<http://www.winfield.demon.nl/>) for reading MS Word files, pdfinfo and pdftotext from Poppler (<http://poppler.freedesktop.org/>) for reading PDF
+# Suggests: antiword, filehash, methods, pdftools, Rcampdf, Rgraphviz, Rpoppler, SnowballC, testthat, tm.lexicon.GeneralInquirer
+# SystemRequirements: C++11
 # Description: A framework for text mining applications within R.
 # License: GPL-3
 # URL: http://tm.r-forge.r-project.org/
 # Additional_repositories: http://datacube.wu.ac.at
 # NeedsCompilation: yes
-# Packaged: 2017-03-02 14:36:20 UTC; hornik
-# Author: Ingo Feinerer [aut, cre], Kurt Hornik [aut], Artifex Software, Inc. [ctb, cph] (pdf_info.ps taken from GPL Ghostscript)
+# Packaged: 2017-12-06 09:38:32 UTC; hornik
+# Author: Ingo Feinerer [aut, cre], Kurt Hornik [aut] (<https://orcid.org/0000-0003-4198-9911>), Artifex Software, Inc. [ctb, cph] (pdf_info.ps taken from GPL Ghostscript)
 # Maintainer: Ingo Feinerer <feinerer@logic.at>
 # Repository: CRAN
-# Date/Publication: 2017-03-02 17:45:01
+# Date/Publication: 2017-12-06 18:26:44 UTC
 
 # See
 # http://docs.continuum.io/conda/build.html for
