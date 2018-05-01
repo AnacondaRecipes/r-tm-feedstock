@@ -14,16 +14,10 @@ source:
     - {{ cran_mirror }}/src/contrib/Archive/tm/tm_{{ version }}.tar.gz
   sha256: f3c3e151e621ffb0c82048b5bf9c2a34c8fb34cf5d2943544979b4fcc2cc1c11
 
-
-  # patches:
-   # List any patch files here
-   # - fix.patch
-
 build:
   merge_build_host: True  # [win]
   # If this is a new build for the same version, increment the build number.
   number: 0
-
 
   # This is required to make R link correctly on Linux.
   rpaths:
